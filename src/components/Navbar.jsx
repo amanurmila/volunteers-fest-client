@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   return (
     <div className="navbar bg-[#7E5CAD] shadow-sm px-20 text-white">
       <div className="flex-1">
-        <Link to="/" className="flex gap-2 items-center">
+        <Link to="/" className="text-2xl font-bold">
           <span className="font-bold">Volunteers Fest</span>
         </Link>
       </div>
@@ -16,12 +17,14 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/jobs">All Volunteers</Link>
+            <Link to="/volunteers">All Volunteers</Link>
           </li>
 
           {!user && (
             <li>
-              <Link to="/login">Login</Link>
+              <Link className="btn btn-success btn-sm" to="/login">
+                Login
+              </Link>
             </li>
           )}
         </ul>
@@ -33,12 +36,18 @@ const Navbar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div title={user?.displayName} className="w-10 rounded-full">
-                <img
-                  referrerPolicy="no-referrer"
-                  alt="User Profile Photo"
-                  src={user?.photoURL}
-                />
+              <div className="border-2 border-gray-400 rounded-full">
+                <div
+                  title={user?.displayName}
+                  className="w-10 h-10 rounded-full overflow-hidden"
+                >
+                  <img
+                    referrerPolicy="no-referrer"
+                    alt="User Profile Photo"
+                    src={user?.photoURL}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
               </div>
             </div>
             <ul

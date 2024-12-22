@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import MainLayout from "../layout/MainLayout";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import AddVolunteer from "../pages/AddVolunteer";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = [
   {
@@ -21,6 +23,14 @@ const routes = [
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/add-volunteer",
+        element: (
+          <PrivateRoute>
+            <AddVolunteer />
+          </PrivateRoute>
+        ),
       },
     ],
   },
