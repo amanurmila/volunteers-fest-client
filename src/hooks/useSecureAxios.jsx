@@ -23,7 +23,7 @@ const useSecureAxios = () => {
           logOut()
             .then(() => {
               // redirect to the login page
-              navigate("/auth/login");
+              navigate("/login");
             })
             .catch((err) => console.log(err));
         }

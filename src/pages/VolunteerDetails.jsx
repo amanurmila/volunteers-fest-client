@@ -1,7 +1,7 @@
 import axios from "axios";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const VolunteerDetails = () => {
   const [volunteer, setVolunteer] = useState([]);
@@ -35,13 +35,16 @@ const VolunteerDetails = () => {
 
       {/* Card Body */}
       <div className="card-body p-6">
-        <h2 className="card-title text-xl font-bold text-gray-800">{volunteer.title}</h2>
+        <h2 className="card-title text-xl font-bold text-gray-800">
+          {volunteer.title}
+        </h2>
         <p className="text-gray-600 mt-2 text-sm leading-relaxed line-clamp-3">
           {volunteer.description}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-sm text-gray-700">
           <div>
-            <span className="font-semibold">Location:</span> {volunteer.location}
+            <span className="font-semibold">Location:</span>{" "}
+            {volunteer.location}
           </div>
           <div>
             <span className="font-semibold">Deadline:</span>{" "}
@@ -55,13 +58,14 @@ const VolunteerDetails = () => {
 
         {/* Button */}
         <div className="mt-6">
-          <button
+          <Link
+            to={`/be-a-volunteer/${volunteer._id}`}
             className="btn w-full py-3 bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 
           hover:from-purple-500 hover:to-green-400 text-white font-semibold 
           rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Be a Volunteer
-          </button>
+          </Link>
         </div>
       </div>
     </div>

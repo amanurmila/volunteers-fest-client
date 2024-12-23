@@ -8,6 +8,7 @@ import AddVolunteer from "../pages/AddVolunteer";
 import PrivateRoute from "./PrivateRoute";
 import AllVolunteers from "../pages/AllVolunteers";
 import VolunteerDetails from "../pages/VolunteerDetails";
+import BeAVolunteer from "../pages/BeAVolunteer";
 
 const routes = [
   {
@@ -43,6 +44,14 @@ const routes = [
         element: (
           <PrivateRoute>
             <VolunteerDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/be-a-volunteer/:id",
+        element: (
+          <PrivateRoute>
+            <BeAVolunteer />
           </PrivateRoute>
         ),
       },

@@ -1,0 +1,249 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import useSecureAxios from "../hooks/useSecureAxios";
+import { toast } from "react-toastify";
+
+const BeAVolunteer = () => {
+  const [volunteer, setVolunteer] = useState([]);
+  const { id } = useParams();
+  const { user } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchVolunteerData();
+  }, [id]);
+
+  const fetchVolunteerData = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/volunteer/${id}`);
+      setVolunteer(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const {
+    thumbnail,
+    title,
+    description,
+    category,
+    location,
+    volunteersNeeded,
+    organizerName,
+    organizerEmail,
+    suggestion,
+    userName,
+    userEmail,
+  } = volunteer;
+
+  const deadlineValue = volunteer.deadline;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const suggestion = form.suggestion.value;
+    const userName = form.userName.value;
+    const userEmail = form.userEmail.value;
+
+    if (isSubmitting) return; // Prevent multiple submissions
+    setIsSubmitting(true); // Lock the button
+
+    // Form data
+    const newFormData = {
+      thumbnail,
+      title,
+      description,
+      category,
+      deadlineValue,
+      location,
+      volunteersNeeded,
+      deadline: deadlineValue,
+      organizer: {
+        organizerName,
+        organizerEmail,
+      },
+      suggestion,
+      user: {
+        userName,
+        userEmail,
+      },
+      organizerId: volunteer._id,
+    };
+
+    console.log(newFormData);
+
+    try {
+    //   await axios.post("http://localhost:5000/be-a-volunteer", newFormData);
+      form.reset();
+      toast.success("Request for be a Volunteer Added Successfully");
+      //   navigate("/");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsSubmitting(false); // Unlock the button
+    }
+  };
+
+  return (
+    <div>
+      <div className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-bold text-center mb-6">
+          Be a Volunteer for this Need
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Thumbnail</label>
+            <input
+              type="text"
+              name="thumbnail"
+              readOnly
+              defaultValue={volunteer.thumbnail}
+              placeholder="Enter thumbnail URL"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Post Title</label>
+            <input
+              type="text"
+              name="title"
+              readOnly
+              defaultValue={volunteer.title}
+              placeholder="Enter post title"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Description
+            </label>
+            <textarea
+              name="description"
+              readOnly
+              defaultValue={volunteer.description}
+              placeholder="Enter description"
+              className="textarea textarea-bordered w-full"
+            ></textarea>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Category</label>
+            <select
+              name="category"
+              readOnly
+              className="select select-bordered w-full"
+            >
+              <option value="healthcare">{volunteer.category}</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Location</label>
+            <input
+              type="text"
+              name="location"
+              readOnly
+              defaultValue={volunteer.location}
+              placeholder="Enter location"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              No. of Volunteers Needed
+            </label>
+            <input
+              type="number"
+              defaultValue={volunteer.volunteersNeeded}
+              name="volunteersNeeded"
+              readOnly
+              placeholder="Enter number"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Deadline</label>
+            <input
+              name="deadline"
+              readOnly
+              defaultValue={
+                volunteer.deadline
+                  ? new Date(volunteer.deadline).toLocaleDateString()
+                  : ""
+              }
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Organizer Name
+            </label>
+            <input
+              type="text"
+              name="organizerName"
+              defaultValue={volunteer.organizerName}
+              readOnly
+              className="input input-bordered w-full bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Organizer Email
+            </label>
+            <input
+              type="email"
+              name="organizerEmail"
+              defaultValue={volunteer.organizerEmail}
+              readOnly
+              className="input input-bordered w-full bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">User Name</label>
+            <input
+              type="text"
+              name="userName"
+              defaultValue={user?.displayName}
+              readOnly
+              className="input input-bordered w-full bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">User Email</label>
+            <input
+              type="email"
+              name="userEmail"
+              defaultValue={user?.email}
+              readOnly
+              className="input input-bordered w-full bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Suggestion</label>
+            <textarea
+              name="suggestion"
+              placeholder="Enter Your Suggestion"
+              className="textarea textarea-bordered w-full"
+            ></textarea>
+          </div>
+          <div className="flex items-center justify-start p-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg shadow-lg max-w-xs mx-auto">
+            <h2 className="text-xl font-semibold text-white">
+              Status:{" "}
+              <span className="font-bold text-yellow-300">Requested</span>
+            </h2>
+          </div>
+
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary">
+              Request
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default BeAVolunteer;
