@@ -6,6 +6,8 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import AddVolunteer from "../pages/AddVolunteer";
 import PrivateRoute from "./PrivateRoute";
+import AllVolunteers from "../pages/AllVolunteers";
+import VolunteerDetails from "../pages/VolunteerDetails";
 
 const routes = [
   {
@@ -29,6 +31,18 @@ const routes = [
         element: (
           <PrivateRoute>
             <AddVolunteer />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/all-volunteers",
+        element: <AllVolunteers />,
+      },
+      {
+        path: "/volunteer/:id",
+        element: (
+          <PrivateRoute>
+            <VolunteerDetails />
           </PrivateRoute>
         ),
       },

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -14,17 +14,17 @@ const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <Link to="/volunteers">All Volunteers</Link>
+            <NavLink to="/all-volunteers">All Volunteers</NavLink>
           </li>
 
           {!user && (
             <li>
-              <Link className="btn btn-success btn-sm" to="/login">
+              <NavLink className="btn btn-success btn-sm" to="/login">
                 Login
-              </Link>
+              </NavLink>
             </li>
           )}
         </ul>
@@ -55,12 +55,12 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-500 rounded-box w-52"
             >
               <li>
-                <Link to="/add-volunteer" className="justify-between">
+                <NavLink to="/add-volunteer" className="justify-between">
                   Add Volunteer
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/manage-volunteers">Manage My Post</Link>
+                <NavLink to="/manage-volunteers">Manage My Post</NavLink>
               </li>
               <li className="mt-2">
                 <button
