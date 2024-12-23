@@ -2,14 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import useSecureAxios from "../hooks/useSecureAxios";
 import { toast } from "react-toastify";
 
 const BeAVolunteer = () => {
   const [volunteer, setVolunteer] = useState([]);
   const { id } = useParams();
   const { user } = useAuth();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,9 +47,6 @@ const BeAVolunteer = () => {
     const userName = form.userName.value;
     const userEmail = form.userEmail.value;
 
-    if (isSubmitting) return; // Prevent multiple submissions
-    setIsSubmitting(true); // Lock the button
-
     // Form data
     const newFormData = {
       thumbnail,
@@ -74,17 +69,17 @@ const BeAVolunteer = () => {
       organizerId: volunteer._id,
     };
 
-    console.log(newFormData);
-
     try {
-    //   await axios.post("http://localhost:5000/be-a-volunteer", newFormData);
+      const response = await axios.post(
+        "http://localhost:5000/be-a-volunteer",
+        newFormData
+      );
       form.reset();
-      toast.success("Request for be a Volunteer Added Successfully");
-      //   navigate("/");
+      toast.success(response.data.message); // Success message from backend
+      // navigate("/"); // Uncomment if you want to navigate after success
     } catch (err) {
-      console.log(err);
-    } finally {
-      setIsSubmitting(false); // Unlock the button
+      console.error(err);
+      toast.error(err.response?.data?.message || "An error occurred"); // Display error from backend
     }
   };
 

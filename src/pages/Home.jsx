@@ -1,8 +1,10 @@
+import ImageSlider from "../components/ImageSlider";
+
 const Home = () => {
   return (
     <div>
-      <div>
-        <h1>Home component</h1>
+      <div className="w-10/12 mx-auto">
+        <ImageSlider />
       </div>
     </div>
   );

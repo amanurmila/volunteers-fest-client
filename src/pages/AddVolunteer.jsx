@@ -127,6 +127,7 @@ const AddVolunteer = () => {
           </label>
           <input
             type="text"
+            name="organizerName"
             value={user?.displayName}
             readOnly
             className="input input-bordered w-full bg-gray-100"
@@ -138,6 +139,7 @@ const AddVolunteer = () => {
           </label>
           <input
             type="email"
+            name="organizerEmail"
             value={user?.email}
             readOnly
             className="input input-bordered w-full bg-gray-100"
