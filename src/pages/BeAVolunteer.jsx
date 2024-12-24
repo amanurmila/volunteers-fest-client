@@ -71,12 +71,14 @@ const BeAVolunteer = () => {
       );
       form.reset();
       toast.success("Request sent successfully");
-      console.log(data);
+      navigate("/all-volunteers");
     } catch (err) {
       console.error("Error in API call:", err.response?.data || err.message);
       toast.error("You have already requested to volunteer for this need");
     }
   };
+
+  console.log(typeof volunteersNeeded)
 
   return (
     <div>
@@ -226,7 +228,11 @@ const BeAVolunteer = () => {
           </div>
 
           <div className="text-center">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              disabled={volunteersNeeded < 1}
+              className={`btn btn-primary`}
+            >
               Request
             </button>
           </div>

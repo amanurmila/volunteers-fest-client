@@ -59,10 +59,11 @@ const VolunteerDetails = () => {
         {/* Button */}
         <div className="mt-6">
           <Link
+            disabled={volunteer.volunteersNeeded < 1}
             to={`/be-a-volunteer/${volunteer._id}`}
-            className="btn w-full py-3 bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 
+            className={`btn w-full py-3 bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 
           hover:from-purple-500 hover:to-green-400 text-white font-semibold 
-          rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+          rounded-lg shadow-lg hover:shadow-xl transition-all duration-300`}
           >
             Be a Volunteer
           </Link>

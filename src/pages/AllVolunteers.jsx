@@ -4,19 +4,21 @@ import AllVolunteersCard from "../components/AllVolunteersCard";
 
 const AllVolunteers = () => {
   const [volunteers, setVolunteers] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchAllVolunteers = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/volunteers");
+        const { data } = await axios.get(
+          `http://localhost:5000/volunteers?search=${search}`
+        );
         setVolunteers(data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchAllVolunteers();
-  }, []);
-
+  }, [search]);
 
   return (
     <div className="w-10/12 mx-auto my-5 flex flex-col items-center">
@@ -26,6 +28,7 @@ const AllVolunteers = () => {
             className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
             type="text"
             name="search"
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Enter Job Title"
             aria-label="Enter Job Title"
           />
