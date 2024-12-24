@@ -32,9 +32,7 @@ const BeAVolunteer = () => {
     volunteersNeeded,
     organizerName,
     organizerEmail,
-    suggestion,
-    userName,
-    userEmail,
+    _id,
   } = volunteer;
 
   const deadlineValue = volunteer.deadline;
@@ -47,7 +45,6 @@ const BeAVolunteer = () => {
     const userName = form.userName.value;
     const userEmail = form.userEmail.value;
 
-    // Form data
     const newFormData = {
       thumbnail,
       title,
@@ -55,31 +52,29 @@ const BeAVolunteer = () => {
       category,
       deadlineValue,
       location,
-      volunteersNeeded,
-      deadline: deadlineValue,
-      organizer: {
-        organizerName,
-        organizerEmail,
-      },
+      volunteersNeeded: parseInt(volunteersNeeded, 10),
+      organizerName,
+      organizerEmail,
       suggestion,
-      user: {
-        userName,
-        userEmail,
-      },
-      organizerId: volunteer._id,
+      userName,
+      userEmail,
+      organizerId: _id,
     };
 
+    console.log("Data being sent to server:", newFormData);
+
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:5000/be-a-volunteer",
-        newFormData
+        newFormData,
+        { withCredentials: true }
       );
       form.reset();
-      toast.success(response.data.message); // Success message from backend
-      // navigate("/"); // Uncomment if you want to navigate after success
+      toast.success("Request sent successfully");
+      console.log(data);
     } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "An error occurred"); // Display error from backend
+      console.error("Error in API call:", err.response?.data || err.message);
+      toast.error("You have already requested to volunteer for this need");
     }
   };
 
