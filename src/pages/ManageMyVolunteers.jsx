@@ -256,7 +256,10 @@ const ManageMyVolunteers = () => {
                           Category
                         </th>
                         <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
-                          Suggestions
+                          Status
+                        </th>
+                        <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                          Suggestion
                         </th>
                         <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
                           Actions
@@ -273,6 +276,7 @@ const ManageMyVolunteers = () => {
                             ).toLocaleDateString()}
                           </td>
                           <td className="px-4 py-4">{request.category}</td>
+                          <td className="px-4 py-4 text-cyan-600">{request.status}</td>
                           <td className="px-4 py-4">{request.suggestion}</td>
                           <td className="px-4 py-4">
                             <button
