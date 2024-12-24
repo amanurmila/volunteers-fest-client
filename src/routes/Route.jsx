@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import AllVolunteers from "../pages/AllVolunteers";
 import VolunteerDetails from "../pages/VolunteerDetails";
 import BeAVolunteer from "../pages/BeAVolunteer";
+import ManageMyVolunteers from "../pages/ManageMyVolunteers";
+import UpdateVolunteer from "../pages/UpdateVolunteer";
 
 const routes = [
   {
@@ -55,6 +57,22 @@ const routes = [
           </PrivateRoute>
         ),
       },
+      {
+        path: "/manage-my-posts",
+        element: (
+          <PrivateRoute>
+            <ManageMyVolunteers />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateVolunteer />
+          </PrivateRoute>
+        ),
+      }
     ],
   },
   {

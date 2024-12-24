@@ -60,7 +60,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/manage-volunteers">Manage My Post</NavLink>
+                <NavLink to="/manage-my-posts">Manage My Post</NavLink>
               </li>
               <li className="mt-2">
                 <button

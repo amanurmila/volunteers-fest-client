@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AlertCircle, ArrowLeft, Home } from "lucide-react";
 
 const Error = ({
@@ -6,6 +6,9 @@ const Error = ({
   message = "The page you're looking for might have been moved or doesn't exist.",
   onBack = () => window.history.back(),
 }) => {
+  useEffect(() => {
+      document.title = "Wrong Route || Volunteer Fest";
+    }, []);
   return (
     <div className="min-h-screen  flex items-center justify-center p-4 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">

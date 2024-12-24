@@ -5,6 +5,9 @@ import AllVolunteersCard from "../components/AllVolunteersCard";
 const AllVolunteers = () => {
   const [volunteers, setVolunteers] = useState([]);
   const [search, setSearch] = useState("");
+  useEffect(() => {
+    document.title = "All Volunteers || Volunteer Fest";
+  }, []);
 
   useEffect(() => {
     const fetchAllVolunteers = async () => {

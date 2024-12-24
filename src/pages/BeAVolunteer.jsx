@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
@@ -9,6 +9,10 @@ const BeAVolunteer = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Be A Volunteer || Volunteer Fest";
+  }, []);
 
   useEffect(() => {
     fetchVolunteerData();
@@ -61,8 +65,6 @@ const BeAVolunteer = () => {
       organizerId: _id,
     };
 
-    console.log("Data being sent to server:", newFormData);
-
     try {
       const { data } = await axios.post(
         "http://localhost:5000/be-a-volunteer",
@@ -71,14 +73,13 @@ const BeAVolunteer = () => {
       );
       form.reset();
       toast.success("Request sent successfully");
-      navigate("/all-volunteers");
+      navigate("/manage-my-posts");
     } catch (err) {
       console.error("Error in API call:", err.response?.data || err.message);
       toast.error("You have already requested to volunteer for this need");
     }
   };
 
-  console.log(typeof volunteersNeeded)
 
   return (
     <div>

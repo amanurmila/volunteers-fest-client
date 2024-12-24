@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../hooks/useAuth";
@@ -12,6 +12,10 @@ const AddVolunteer = () => {
   const [deadline, setDeadline] = useState(new Date());
   const secureAxios = useSecureAxios();
   const navigate = useNavigate();
+
+  useEffect(() => {
+      document.title = "Add Volunteers Need || Volunteer Fest";
+    }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
