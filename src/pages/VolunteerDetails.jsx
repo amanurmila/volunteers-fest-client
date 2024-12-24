@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const VolunteerDetails = () => {
   const [volunteer, setVolunteer] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
+  const secureAxios = useSecureAxios();
 
   useEffect(() => {
     document.title = "Need Post Details || Volunteer Fest";
@@ -19,7 +21,7 @@ const VolunteerDetails = () => {
 
   const fetchVolunteerData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/volunteer/${id}`);
+      const { data } = await secureAxios.get(`/volunteer/${id}`);
       setVolunteer(data);
     } catch (error) {
       console.error(error);
@@ -35,7 +37,7 @@ const VolunteerDetails = () => {
       return;
     }
 
-    if(volunteer.volunteersNeeded < 1) {
+    if (volunteer.volunteersNeeded < 1) {
       toast.error("Required volunteers are already filled!");
       return;
     }

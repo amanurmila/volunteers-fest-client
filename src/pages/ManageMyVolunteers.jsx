@@ -3,11 +3,13 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const ManageMyVolunteers = () => {
   const [myVolunteers, setMyVolunteers] = useState([]);
   const [myRequests, setMyRequests] = useState([]);
   const { user } = useAuth();
+  const secureAxios = useSecureAxios();
 
   useEffect(() => {
     document.title = "Manage Your || Volunteer Fest";
@@ -25,8 +27,8 @@ const ManageMyVolunteers = () => {
   //   Fetching all requests
   const fetchAllRequests = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:5000/volunteers-requests/${userEmail}`
+      const { data } = await secureAxios.get(
+        `/volunteers-requests/${userEmail}`
       );
       setMyRequests(data);
     } catch (error) {
@@ -40,9 +42,7 @@ const ManageMyVolunteers = () => {
   //   Fetching all volunteers
   const fetchAllVolunteers = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:5000/volunteers/${userEmail}`
-      );
+      const { data } = await secureAxios.get(`/volunteers/${userEmail}`);
       setMyVolunteers(data);
     } catch (error) {
       console.error(
@@ -55,7 +55,7 @@ const ManageMyVolunteers = () => {
   //   Delete from volunteers needed
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/volunteer/${id}`);
+      await secureAxios.delete(`/volunteer/${id}`);
       toast.success("Volunteers Need Post Deleted Successfully!!!");
       fetchAllVolunteers();
     } catch (err) {
@@ -95,7 +95,7 @@ const ManageMyVolunteers = () => {
 
   const handleCancel = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/volunteer-request/${id}`);
+      await secureAxios.delete(`/volunteer-request/${id}`);
       toast.success("Request for be a Volunteer Cancelled Successfully!!!");
       fetchAllRequests();
     } catch (err) {

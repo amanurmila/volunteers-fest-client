@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const BeAVolunteer = () => {
   const [volunteer, setVolunteer] = useState([]);
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const secureAxios = useSecureAxios();
 
   useEffect(() => {
     document.title = "Be A Volunteer || Volunteer Fest";
@@ -20,7 +22,7 @@ const BeAVolunteer = () => {
 
   const fetchVolunteerData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/volunteer/${id}`);
+      const { data } = await secureAxios.get(`/volunteer/${id}`);
       setVolunteer(data);
     } catch (error) {
       console.error(error);
@@ -66,11 +68,9 @@ const BeAVolunteer = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/be-a-volunteer",
-        newFormData,
-        { withCredentials: true }
-      );
+      const { data } = await secureAxios.post("/be-a-volunteer", newFormData, {
+        withCredentials: true,
+      });
       form.reset();
       toast.success("Request sent successfully");
       navigate("/manage-my-posts");
@@ -79,7 +79,6 @@ const BeAVolunteer = () => {
       toast.error("You have already requested to volunteer for this need");
     }
   };
-
 
   return (
     <div>

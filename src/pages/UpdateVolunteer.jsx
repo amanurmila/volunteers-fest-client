@@ -5,6 +5,7 @@ import { set } from "date-fns";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const UpdateVolunteer = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const UpdateVolunteer = () => {
   const { id } = useParams();
   const [startDate, setStartDate] = useState(new Date());
   const [volunteer, setVolunteer] = useState({});
+  const secureAxios = useSecureAxios();
 
   useEffect(() => {
     document.title = "Update a Volunteers Need Post || Volunteer Fest";
@@ -22,7 +24,7 @@ const UpdateVolunteer = () => {
   }, [id]);
 
   const fetchVolunteerData = async () => {
-    const { data } = await axios.get(`http://localhost:5000/volunteer/${id}`);
+    const { data } = await secureAxios.get(`/volunteer/${id}`);
     setVolunteer(data);
     setStartDate(new Date(data.deadline));
   };
@@ -55,7 +57,7 @@ const UpdateVolunteer = () => {
     };
 
     try {
-      await axios.put(`http://localhost:5000/update-volunteer/${id}`, formData);
+      await secureAxios.put(`/update-volunteer/${id}`, formData);
       form.reset();
       toast.success("Volunteer Need Post Updated Successfully");
       navigate("/manage-my-posts");

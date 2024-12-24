@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AllVolunteersCard from "../components/AllVolunteersCard";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const AllVolunteers = () => {
   const [volunteers, setVolunteers] = useState([]);
   const [search, setSearch] = useState("");
+  const secureAxios = useSecureAxios();
   useEffect(() => {
     document.title = "All Volunteers || Volunteer Fest";
   }, []);
@@ -12,9 +14,7 @@ const AllVolunteers = () => {
   useEffect(() => {
     const fetchAllVolunteers = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:5000/volunteers?search=${search}`
-        );
+        const { data } = await secureAxios.get(`/volunteers?search=${search}`);
         setVolunteers(data);
       } catch (error) {
         console.log(error);
