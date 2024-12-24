@@ -65,6 +65,7 @@ const BeAVolunteer = () => {
       userName,
       userEmail,
       organizerId: _id,
+      status: "Requested",
     };
 
     try {
@@ -219,12 +220,6 @@ const BeAVolunteer = () => {
               placeholder="Enter Your Suggestion"
               className="textarea textarea-bordered w-full"
             ></textarea>
-          </div>
-          <div className="flex items-center justify-start p-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg shadow-lg max-w-xs mx-auto">
-            <h2 className="text-xl font-semibold text-white">
-              Status:{" "}
-              <span className="font-bold text-yellow-300">Requested</span>
-            </h2>
           </div>
 
           <div className="text-center">
