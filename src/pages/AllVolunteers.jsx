@@ -29,7 +29,7 @@ const AllVolunteers = () => {
   return (
     <div className="w-10/12 mx-auto my-5">
       {/* Search Bar and Layout Toggle */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
         {/* Search Input */}
         <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
           <input
@@ -68,38 +68,44 @@ const AllVolunteers = () => {
         </div>
       </div>
 
-      {/* Conditional Rendering for Layout */}
       {isTableView ? (
         <section>
           {/* Table Layout */}
-          <table className="table-auto w-full border border-gray-300 text-left">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Category</th>
-                <th className="px-4 py-2">Deadline</th>
-                <th className="px-4 py-2">Volunteers Need</th>
-                <th className="px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {volunteers.map((volunteer) => (
-                <tr key={volunteer._id} className="hover:bg-gray-50">
-                  <td className="px-4 py-2">{volunteer.title}</td>
-                  <td className="px-4 py-2">{volunteer.category}</td>
-                  <td className="px-4 py-2">
-                    {new Date(volunteer.deadline).toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-2 text-center">{volunteer.volunteersNeeded}</td>
-                  <td className="px-4 py-2">
-                    <Link to={`/volunteer/${volunteer._id}`} className="text-sm text-blue-600 hover:underline">
-                      View Details
-                    </Link>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="table-auto w-full border border-gray-300 text-left">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="px-4 py-2">Name</th>
+                  <th className="px-4 py-2">Category</th>
+                  <th className="px-4 py-2">Deadline</th>
+                  <th className="px-4 py-2">Volunteers Need</th>
+                  <th className="px-4 py-2">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {volunteers.map((volunteer) => (
+                  <tr key={volunteer._id} className="hover:bg-gray-50">
+                    <td className="px-4 py-2">{volunteer.title}</td>
+                    <td className="px-4 py-2">{volunteer.category}</td>
+                    <td className="px-4 py-2">
+                      {new Date(volunteer.deadline).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-2 text-center">
+                      {volunteer.volunteersNeeded}
+                    </td>
+                    <td className="px-4 py-2">
+                      <Link
+                        to={`/volunteer/${volunteer._id}`}
+                        className="text-sm text-blue-600 hover:underline"
+                      >
+                        View Details
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       ) : (
         <section className="grid grid-cols-1 gap-6 p-4 mt-4 md:grid-cols-2 lg:grid-cols-3">

@@ -225,7 +225,7 @@ const BeAVolunteer = () => {
           <div className="text-center">
             <button
               type="submit"
-              disabled={volunteersNeeded < 1}
+              disabled={volunteersNeeded < 1 || organizerEmail === user?.email}
               className={`btn btn-primary`}
             >
               Request

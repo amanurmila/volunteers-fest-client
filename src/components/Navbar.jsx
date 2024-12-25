@@ -1,21 +1,36 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link, NavLink } from "react-router-dom";
 import ThemeContext from "../providers/ThemeContext"; // Import Theme Context
-import { FaMoon, FaSun } from "react-icons/fa"; // Icons for toggle button
+import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa"; // Icons for toggle button
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext); // Access theme and toggleTheme
+  const [menuOpen, setMenuOpen] = useState(false); // State to control mobile menu toggle
 
   return (
-    <div className="navbar bg-[#7E5CAD] shadow-sm px-20 text-white">
-      <div className="flex-1">
+    <div className="navbar bg-[#7E5CAD] shadow-sm px-6 md:px-20 text-white">
+      {/* Logo */}
+      <div className="flex-1 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold">
           <span className="font-bold">Volunteers Fest</span>
         </Link>
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
-      <div className="flex-none flex items-center">
+
+      {/* Navigation Links */}
+      <div
+        className={`flex-none flex-col md:flex-row md:flex items-center transition-all duration-300 ${
+          menuOpen ? "flex" : "hidden"
+        } md:flex`}
+      >
         {/* Theme Toggle Button */}
         <button
           className="p-2 rounded-full transition-all duration-300 bg-base-100 shadow-md mr-4"
@@ -28,7 +43,7 @@ const Navbar = () => {
           )}
         </button>
 
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-vertical md:menu-horizontal px-1 space-y-2 md:space-y-0 md:space-x-4">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
