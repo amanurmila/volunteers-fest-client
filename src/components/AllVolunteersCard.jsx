@@ -9,7 +9,7 @@ const AllVolunteersCard = ({ volunteer }) => {
     volunteer;
   return (
     <div>
-      <div className="card w-full bg-base-100 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
+      <div className="card w-full bg-base-100 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border border-gray-200">
         <figure>
           <img
             src={thumbnail}

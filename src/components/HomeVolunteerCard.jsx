@@ -7,7 +7,7 @@ const HomeVolunteerCard = ({ volunteer }) => {
   const { thumbnail, title, category, deadline, _id } = volunteer;
   return (
     <div>
-      <div className="card bg-white shadow-xl rounded-lg hover:scale-105 transition-transform duration-300 border border-gray-200">
+      <div className="card bg-base-100 shadow-xl rounded-lg hover:scale-105 transition-transform duration-300 border border-gray-200">
         {/* Thumbnail */}
         <figure>
           <img
@@ -20,7 +20,7 @@ const HomeVolunteerCard = ({ volunteer }) => {
         {/* Card Body */}
         <div className="card-body p-4">
           {/* Title */}
-          <h2 className="card-title text-xl font-bold text-gray-800">
+          <h2 className="card-title text-xl font-bold text-primary">
             {title}
           </h2>
 

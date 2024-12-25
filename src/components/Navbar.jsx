@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link, NavLink } from "react-router-dom";
+import ThemeContext from "../providers/ThemeContext"; // Import Theme Context
+import { FaMoon, FaSun } from "react-icons/fa"; // Icons for toggle button
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext); // Access theme and toggleTheme
+
   return (
     <div className="navbar bg-[#7E5CAD] shadow-sm px-20 text-white">
       <div className="flex-1">
@@ -11,7 +15,19 @@ const Navbar = () => {
           <span className="font-bold">Volunteers Fest</span>
         </Link>
       </div>
-      <div className="flex-none">
+      <div className="flex-none flex items-center">
+        {/* Theme Toggle Button */}
+        <button
+          className="p-2 rounded-full transition-all duration-300 bg-base-100 shadow-md mr-4"
+          onClick={toggleTheme}
+        >
+          {theme === "light" ? (
+            <FaMoon className="text-xl text-gray-700" />
+          ) : (
+            <FaSun className="text-xl text-yellow-500" />
+          )}
+        </button>
+
         <ul className="menu menu-horizontal px-1">
           <li>
             <NavLink to="/">Home</NavLink>

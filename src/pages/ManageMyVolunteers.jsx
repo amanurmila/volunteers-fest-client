@@ -142,11 +142,11 @@ const ManageMyVolunteers = () => {
         </h1>
         {myVolunteers.length === 0 ? (
           <div className="flex flex-col items-center justify-center mt-20 space-y-8">
-            <div className="p-6 space-y-4 max-w-lg text-center bg-gray-50 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-semibold text-gray-700">
+            <div className="p-6 space-y-4 max-w-lg text-center bg-base-100 rounded-lg shadow-lg">
+              <h2 className="text-2xl font-semibold text-primary">
                 No Volunteers Needed Post Found
               </h2>
-              <p className="text-gray-500 mb-5">
+              <p className="text-purple-500 mb-5">
                 You don’t have any volunteers needed post yet. Once you add a
                 volunteer needed post, they’ll appear here.
               </p>
@@ -164,7 +164,7 @@ const ManageMyVolunteers = () => {
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div className="overflow-hidden border border-gray-200 md:rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-base-100">
                       <tr>
                         <th className="py-3.5 px-4 text-sm font-normal text-left text-gray-500">
                           Title
@@ -180,7 +180,7 @@ const ManageMyVolunteers = () => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-base-100 divide-y divide-gray-200">
                       {myVolunteers.map((volunteer) => (
                         <tr key={volunteer._id}>
                           <td className="px-4 py-4">{volunteer.title}</td>
@@ -222,11 +222,11 @@ const ManageMyVolunteers = () => {
         </h1>
         {myRequests.length === 0 ? (
           <div className="flex flex-col items-center justify-center mt-20 space-y-8">
-            <div className="p-6 space-y-4 max-w-lg text-center bg-gray-50 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-semibold text-gray-700">
+            <div className="p-6 space-y-4 max-w-lg text-center bg-base-100 rounded-lg shadow-lg">
+              <h2 className="text-2xl font-semibold text-primary">
                 No Volunteer Request Found
               </h2>
-              <p className="text-gray-500 mb-5">
+              <p className="text-purple-500 mb-5">
                 You don’t have any volunteer requests yet. Once you request, it
                 will appear here.
               </p>
@@ -244,7 +244,7 @@ const ManageMyVolunteers = () => {
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div className="overflow-hidden border border-gray-200 md:rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-base-50">
                       <tr>
                         <th className="py-3.5 px-4 text-sm font-normal text-left text-gray-500">
                           Title
@@ -266,7 +266,7 @@ const ManageMyVolunteers = () => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-base divide-y divide-gray-200">
                       {myRequests.map((request) => (
                         <tr key={request._id}>
                           <td className="px-4 py-4">{request.title}</td>

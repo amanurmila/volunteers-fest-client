@@ -61,13 +61,13 @@ const VolunteerDetails = () => {
 
       {/* Card Body */}
       <div className="card-body p-6">
-        <h2 className="card-title text-xl font-bold text-gray-800">
+        <h2 className="card-title text-xl font-bold text-primary">
           {volunteer.title}
         </h2>
-        <p className="text-gray-600 mt-2 text-sm leading-relaxed line-clamp-3">
+        <p className="text-purple-600 mt-2 text-sm leading-relaxed line-clamp-3">
           {volunteer.description}
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-sm text-gray-700">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-sm text-purple-600">
           <div>
             <span className="font-semibold">Location:</span>{" "}
             {volunteer.location}
@@ -81,6 +81,12 @@ const VolunteerDetails = () => {
             {volunteer.volunteersNeeded}
           </div>
         </div>
+
+        {volunteer.volunteersNeeded === 0 && (
+          <div className="text-red-500">
+            In this post Volunteers are totally Filled
+          </div>
+        )}
 
         {/* Button */}
         <div className="mt-6">
