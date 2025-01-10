@@ -108,7 +108,7 @@ const AllVolunteers = () => {
           </div>
         </section>
       ) : (
-        <section className="grid grid-cols-1 gap-6 p-4 mt-4 md:grid-cols-2 lg:grid-cols-3">
+        <section className="grid grid-cols-1 gap-6 p-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
           {volunteers.map((volunteer) => (
             <AllVolunteersCard key={volunteer._id} volunteer={volunteer} />
           ))}

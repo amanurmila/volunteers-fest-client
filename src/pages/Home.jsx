@@ -40,7 +40,7 @@ const Home = () => {
         <h2 className="text-center text-3xl font-bold my-6 underline">
           Volunteers Needs Now
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {sortedVolunteers.map((volunteer) => (
             <HomeVolunteerCard key={volunteer._id} volunteer={volunteer} />
           ))}

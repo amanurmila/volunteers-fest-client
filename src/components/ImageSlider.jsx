@@ -66,7 +66,7 @@ const ImageSlider = () => {
                 alt={`Slide ${index + 1}`}
                 className="w-full h-full object-cover transition-all duration-300 ease-in-out hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-6">
+              <div className="absolute inset-0 hidden bg-black bg-opacity-50 md:flex flex-col justify-center items-center text-white p-6">
                 <h2 className="text-3xl font-semibold mb-4">{slide.title}</h2>
                 <p className="text-lg">{slide.description}</p>
               </div>
