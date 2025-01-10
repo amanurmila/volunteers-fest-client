@@ -10,7 +10,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); // State to control mobile menu toggle
 
   return (
-    <div className="navbar bg-[#7E5CAD] shadow-sm px-6 md:px-20 text-white">
+    <div className="navbar fixed z-50 bg-[#7E5CAD] shadow-sm px-6 md:px-20 text-white">
       {/* Logo */}
       <div className="flex-1 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold">
