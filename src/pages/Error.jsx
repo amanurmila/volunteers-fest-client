@@ -10,7 +10,7 @@ const Error = ({
       document.title = "Wrong Route || Volunteer Fest";
     }, []);
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen mt-20 flex items-center justify-center p-4 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -right-10 -top-10 w-72 h-72  rounded-full animate-blob"></div>
       </div>

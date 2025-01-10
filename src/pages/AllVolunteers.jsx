@@ -8,6 +8,7 @@ const AllVolunteers = () => {
   const [volunteers, setVolunteers] = useState([]);
   const [search, setSearch] = useState("");
   const [isTableView, setIsTableView] = useState(false); // State to toggle layout
+  const [sortOption, setSortOption] = useState(""); // State for sorting
   const secureAxios = useSecureAxios();
 
   useEffect(() => {
@@ -26,9 +27,20 @@ const AllVolunteers = () => {
     fetchAllVolunteers();
   }, [search]);
 
+  // Sort volunteers based on selected option
+  const sortedVolunteers = [...volunteers].sort((a, b) => {
+    if (sortOption === "deadline") {
+      return new Date(a.deadline) - new Date(b.deadline); // Ascending by deadline
+    }
+    if (sortOption === "volunteersNeeded") {
+      return a.volunteersNeeded - b.volunteersNeeded; // Ascending by volunteers needed
+    }
+    return 0; // No sorting
+  });
+
   return (
-    <div className="w-10/12 mx-auto my-5">
-      {/* Search Bar and Layout Toggle */}
+    <div className="w-10/12 mx-auto my-5 mt-20">
+      {/* Search Bar, Sort, and Layout Toggle */}
       <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
         {/* Search Input */}
         <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
@@ -43,6 +55,21 @@ const AllVolunteers = () => {
           <button className="px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
             Search
           </button>
+        </div>
+
+        {/* Sort Dropdown */}
+        <div>
+          <select
+            className="select select-bordered w-full max-w-xs"
+            onChange={(e) => setSortOption(e.target.value)}
+            value={sortOption}
+          >
+            <option value="">Sort By</option>
+            <option value="deadline">Deadline (Ascending)</option>
+            <option value="volunteersNeeded">
+              Volunteers Needed (Ascending)
+            </option>
+          </select>
         </div>
 
         {/* Layout Toggle Icons */}
@@ -83,7 +110,7 @@ const AllVolunteers = () => {
                 </tr>
               </thead>
               <tbody>
-                {volunteers.map((volunteer) => (
+                {sortedVolunteers.map((volunteer) => (
                   <tr key={volunteer._id} className="hover:bg-gray-50">
                     <td className="px-4 py-2">{volunteer.title}</td>
                     <td className="px-4 py-2">{volunteer.category}</td>
@@ -109,7 +136,7 @@ const AllVolunteers = () => {
         </section>
       ) : (
         <section className="grid grid-cols-1 gap-6 p-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
-          {volunteers.map((volunteer) => (
+          {sortedVolunteers.map((volunteer) => (
             <AllVolunteersCard key={volunteer._id} volunteer={volunteer} />
           ))}
         </section>

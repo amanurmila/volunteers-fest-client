@@ -5,6 +5,7 @@ import HomeVolunteerCard from "../components/HomeVolunteerCard";
 import { Link } from "react-router-dom";
 import AboutSection from "../components/AboutSection";
 import ContactSection from "../components/ContactSection";
+import VolunteersSection from "../components/VolunteersSection";
 
 const Home = () => {
   const [sortedVolunteers, setSortedVolunteers] = useState([]);
@@ -28,7 +29,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-20">
       <div className="w-10/12 mx-auto">
         <ImageSlider />
       </div>
@@ -55,6 +56,9 @@ const Home = () => {
         </div>
       </section>
       <div className="divider"></div>
+      <section>
+        <VolunteersSection />
+      </section>
       <section>
         <ContactSection />
       </section>

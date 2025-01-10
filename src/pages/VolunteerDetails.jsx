@@ -46,7 +46,7 @@ const VolunteerDetails = () => {
   };
 
   return (
-    <div className="card my-10 w-full max-w-md mx-auto bg-base-100 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 rounded-lg">
+    <div className="card mt-20 my-10 w-full max-w-md mx-auto bg-base-100 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 rounded-lg">
       {/* Image Section */}
       <figure className="relative h-56 w-full">
         <img
